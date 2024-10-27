@@ -8,29 +8,33 @@ import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
 
+@Profile("sender")
 @Service
 public class One2oneSender {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @Autowired
     private Queue queue;
+
+    @Autowired
+    public One2oneSender(Queue queue) {
+        this.queue = queue;
+    }
 
     public void send() {
         Scanner scanner = new Scanner(System.in);
         String message;
 
-        System.out.println("Type the message or type \"exit\" to quit.");
+        System.out.println("Type the message or type 'exit' to quit.");
 
-        // Loop as long as the message is not "exit"
         while (!(message = scanner.nextLine()).equalsIgnoreCase("exit")) {
-            this.rabbitTemplate.convertAndSend(queue.getName(), message);
+            this.rabbitTemplate.convertAndSend("direct", "one2one", message);
             System.out.println("[x] Sent '" + message + "'");
-
-            System.out.println("Type the message or type \"exit\" to quit.");
+            System.out.println("Type the message or type 'exit' to quit.");
         }
 
         System.out.println("Exited!");
         scanner.close();
     }
+
 }
