@@ -14,7 +14,7 @@ public class MqueueApplication {
 	@Bean
 	public CommandLineRunner execute(One2oneSender sender) {
 		return args -> {
-			sender.send();
+			sender.startChat();
 		};
 	}
 

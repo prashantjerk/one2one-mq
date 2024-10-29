@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile({"one2one", "message_queue"})
+@Profile("one2one")
 @Configuration
 public class One2oneConfig {
 
@@ -14,8 +14,14 @@ public class One2oneConfig {
     public DirectExchange exchange() {
         return new DirectExchange("direct");
     }
+
     @Bean
-    public Queue queue() {
-        return new Queue("one2oneQ");
+    public Queue queue1() {
+        return new Queue("Q1");
+    }
+
+    @Bean
+    public Queue queue2() {
+        return new Queue("Q2");
     }
 }
