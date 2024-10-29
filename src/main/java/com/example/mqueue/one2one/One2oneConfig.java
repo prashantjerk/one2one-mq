@@ -1,28 +1,27 @@
 package com.example.mqueue.one2one;
 
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile({"one2one", "message_queue"})
+@Profile("one2one")
 @Configuration
 public class One2oneConfig {
 
     @Bean
-    public Queue hello() {
-        return new Queue("hello");
+    public DirectExchange exchange() {
+        return new DirectExchange("direct");
     }
 
-    @Profile("receiver")
     @Bean
-    public One2oneReceiver receiver() {
-        return new One2oneReceiver();
+    public Queue queue1() {
+        return new Queue("Q1");
     }
 
-    @Profile("sender")
     @Bean
-    public One2oneSender sender() {
-        return new One2oneSender();
+    public Queue queue2() {
+        return new Queue("Q2");
     }
 }
