@@ -17,11 +17,11 @@ public class One2oneConfig {
 
     @Bean
     public Queue queue1() {
-        return new Queue("Q1");
+        return new Queue("Q1", true);
     }
 
     @Bean
     public Queue queue2() {
-        return new Queue("Q2");
+        return new Queue("Q2", true);
     }
 }

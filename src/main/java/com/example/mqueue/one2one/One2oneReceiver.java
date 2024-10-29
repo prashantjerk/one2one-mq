@@ -58,8 +58,8 @@ public class One2oneReceiver {
                 break;
             }
             this.rabbitTemplate.convertAndSend("direct", "key2", message);
-            System.out.println("Sent to Sender: " + message);
+            System.out.println("Sent: " + message);
         }
         scanner.close();
-    }
+     }
 }
